@@ -1,5 +1,6 @@
 package vlc;
 
+#if windows
 import cpp.Callable;
 import cpp.Function;
 import cpp.Pointer;
