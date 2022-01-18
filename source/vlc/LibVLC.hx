@@ -5,17 +5,18 @@ import cpp.Function;
 import cpp.Pointer;
 import cpp.RawPointer;
 import cpp.UInt8;
+//import cpp.Void;
 import haxe.io.ArrayBufferView;
 import lime.utils.UInt8Array;
 
-// import cpp.Void;
 
 /**
  * ...
  * @author Tommy S
  */
 //
-@:buildXml('<include name="../../../../source/vlc/LibVLCBuild.xml" />')
+
+@:buildXml('<include name="./../../../src/vlc/LibVLCBuild.xml" />')
 @:include("LibVLC.h")
 @:unreflective
 @:keep
@@ -23,24 +24,20 @@ import lime.utils.UInt8Array;
 extern class LibVLC
 {
 	@:native("LibVLC::create")
-	public static function create():LibVLC;
+	public static function create() : LibVLC;
 
 	@:native("setPath")
 	public function setPath(path:String):Void;
 
 	@:native("openMedia")
 	public function openMedia(path:String):Void;
-
+	
 	@:native("play")
-	@:overload(function():Void
-	{
-	})
+	@:overload(function():Void{})
 	public function play(path:String):Void;
 
 	@:native("playInWindow")
-	@:overload(function():Void
-	{
-	})
+	@:overload(function():Void{})
 	public function playInWindow(path:String):Void;
 
 	@:native("stop")
@@ -69,12 +66,12 @@ extern class LibVLC
 
 	@:native("getWidth")
 	public function getWidth():Int;
-
+	
 	@:native("getHeight")
 	public function getHeight():Int;
 
-	@:native("getMeta")
-	public function getMeta(meta:Dynamic):String;
+	//@:native("getMeta")
+	//public function getMeta(meta:Dynamic):String;
 
 	@:native("isPlaying")
 	public function isPlaying():Bool;
@@ -87,30 +84,30 @@ extern class LibVLC
 
 	@:native("getVolume")
 	public function getVolume():Float;
-
+	
 	@:native("getTime")
 	public function getTime():Int;
-
+	
 	@:native("setTime")
 	public function setTime(time:Int):Void;
-
+	
 	@:native("getPosition")
 	public function getPosition():Float;
-
+	
 	@:native("setPosition")
 	public function setPosition(pos:Float):Void;
-
+	
 	@:native("useHWacceleration")
 	public function useHWacceleration(hwAcc:Bool):Void;
-
+	
 	@:native("getLastError")
 	public function getLastError():String;
-
+	
 	@:native("getRepeat")
 	public function getRepeat():Int;
-
+	
 	@:native("setRepeat")
-	public function setRepeat(repeat:Int = 1):Void;
+	public function setRepeat(repeat:Int=-1):Void;
 
 	@:native("getPixelData")
 	public function getPixelData():Pointer<UInt8>;
@@ -120,9 +117,9 @@ extern class LibVLC
 
 	@:native("flags")
 	public var flags:Array<Int>;
-
+	
 	public inline function dispose():Void
 	{
-		// untyped __cpp__('::delete this');
+		untyped __cpp__('delete this');
 	}
 }
